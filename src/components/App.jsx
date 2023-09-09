@@ -24,7 +24,7 @@ export default function App() {
       <Section>
         <Routes>
           <Route
-            index
+            path="/react-hw-05-movies"
             element={
               <Container>
                 <Suspense fallback={<BarLoader color="#00f" />}>
@@ -34,7 +34,7 @@ export default function App() {
             }
           />
           <Route
-            path="/movies"
+            path="/react-hw-05-movies/movies"
             element={
               <Container>
                 <Suspense fallback={<BarLoader color="#00f" />}>
@@ -44,7 +44,7 @@ export default function App() {
             }
           />
           <Route
-            path="/movies/:movieId"
+            path="/react-hw-05-movies/movies/:movieId"
             element={
               <Container>
                 <Suspense fallback={<BarLoader color="#00f" />}>
@@ -54,7 +54,7 @@ export default function App() {
             }
           >
             <Route
-              path="/movies/:movieId/cast"
+              path="/react-hw-05-movies/movies/:movieId/cast"
               element={
                 <Suspense fallback={<BarLoader color="#00f" />}>
                   <Cast />
@@ -62,7 +62,7 @@ export default function App() {
               }
             />
             <Route
-              path="/movies/:movieId/reviews"
+              path="/react-hw-05-movies/movies/:movieId/reviews"
               element={
                 <Suspense fallback={<BarLoader color="#00f" />}>
                   <Reviews />

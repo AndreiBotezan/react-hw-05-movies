@@ -58,7 +58,7 @@ export default function MovieDetailsPage() {
     function goBackHandle() {
         if (from === null) {
             //Go back functionality for first load of page from address bar
-            navigate('/', { replace: true });
+            navigate('/react-hw-05-movies', { replace: true });
             return;
         }
 
@@ -86,69 +86,151 @@ export default function MovieDetailsPage() {
         return hoursText + minutesText;
     }
 
-    return <>
-        
-        {movie &&
-            <div className={s.details}>
-                <div className={s.image_wrapper}>
-                    {movie.poster_path
-                    ? <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.original_title} className={s.image}/>
-                    : <img src='https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg' alt={movie.original_title} className={s.image} />
-                    }
-                    
-                    <button onClick={goBackHandle} className={s.go_back}>
-                        <svg className={s.go_back__icon} width="16" height="16" aria-label="logo">
-                            <use href={`${sprite}#arrow-back`}></use>
-                        </svg>
-                    </button>
-                </div>
+    return (
+      <>
+        {movie && (
+          <div className={s.details}>
+            <div className={s.image_wrapper}>
+              {movie.poster_path ? (
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.original_title}
+                  className={s.image}
+                />
+              ) : (
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
+                  alt={movie.original_title}
+                  className={s.image}
+                />
+              )}
 
-                <div className={s.description}>
-                    <div className={s.title_wrapper}>
-                        <h2 className={s.title}>{movie.original_title}</h2>
-                        {movie.tagline !== ""
-                            // Checking for dot at the end of a string with tagline
-                            ? <p className={s.tagline}>"{movie.tagline}"</p>
-                            : ''
-                        }
-                    </div>
-                    <ul className={s.info}>
-                        {movie.vote_average !== 0
-                            ? <li className={s.info__item}>User Score: <span className={s.info__value}><span className={s.star}><i className="fa fa-star-o"></i></span>&#160;{movie.vote_average}</span></li>
-                            : <li className={s.info__item}>User Score: <span className={s.info__value}><span className={s.star}><i className="fa fa-star-o"></i></span>&#160;--</span></li>}
-                        {movie.release_date !== ''
-                            ? <li className={s.info__item}>Release date: <span className={s.info__value}>{new Date(movie.release_date).toLocaleDateString("en-US", options)}</span></li>
-                            : <li className={s.info__item}>Release date: <span className={s.info__value}>--</span></li>}
-                        {movie.budget !== 0
-                            ? <li className={s.info__item}>Budget: <span className={s.info__value}>${movie.budget.toLocaleString()}</span></li>
-                            : ''}
-                        {movie.revenue !== 0
-                            ? <li className={s.info__item}>Revenue: <span className={s.info__value}>${movie.revenue.toLocaleString()}</span></li>
-                            : ''}
-                        {movie.runtime !== 0
-                            ? <li className={s.info__item}>Runtime: <span className={s.info__value}>{timeConvert(movie.runtime)}</span></li>
-                            : ''}
-                        <li className={s.info__item}>Genres: <ul className={s.genres}>
-                            {movie.genres.length>0 
-                                ? movie.genres.map(({ id, name }, index) => (
-                                    <li className={s.genres__item} key={id}>
-                                        { (index  ? ', ' : '') + name }
-                                    </li>
-                                    ))
-                                : <p className={s.genres__item}>Other</p>}
-                            </ul>
+              <button onClick={goBackHandle} className={s.go_back}>
+                <svg
+                  className={s.go_back__icon}
+                  width="16"
+                  height="16"
+                  aria-label="logo"
+                >
+                  <use href={`${sprite}#arrow-back`}></use>
+                </svg>
+              </button>
+            </div>
+
+            <div className={s.description}>
+              <div className={s.title_wrapper}>
+                <h2 className={s.title}>{movie.original_title}</h2>
+                {movie.tagline !== '' ? (
+                  // Checking for dot at the end of a string with tagline
+                  <p className={s.tagline}>"{movie.tagline}"</p>
+                ) : (
+                  ''
+                )}
+              </div>
+              <ul className={s.info}>
+                {movie.vote_average !== 0 ? (
+                  <li className={s.info__item}>
+                    User Score:{' '}
+                    <span className={s.info__value}>
+                      <span className={s.star}>
+                        <i className="fa fa-star-o"></i>
+                      </span>
+                      &#160;{movie.vote_average}
+                    </span>
+                  </li>
+                ) : (
+                  <li className={s.info__item}>
+                    User Score:{' '}
+                    <span className={s.info__value}>
+                      <span className={s.star}>
+                        <i className="fa fa-star-o"></i>
+                      </span>
+                      &#160;--
+                    </span>
+                  </li>
+                )}
+                {movie.release_date !== '' ? (
+                  <li className={s.info__item}>
+                    Release date:{' '}
+                    <span className={s.info__value}>
+                      {new Date(movie.release_date).toLocaleDateString(
+                        'en-US',
+                        options
+                      )}
+                    </span>
+                  </li>
+                ) : (
+                  <li className={s.info__item}>
+                    Release date: <span className={s.info__value}>--</span>
+                  </li>
+                )}
+                {movie.budget !== 0 ? (
+                  <li className={s.info__item}>
+                    Budget:{' '}
+                    <span className={s.info__value}>
+                      ${movie.budget.toLocaleString()}
+                    </span>
+                  </li>
+                ) : (
+                  ''
+                )}
+                {movie.revenue !== 0 ? (
+                  <li className={s.info__item}>
+                    Revenue:{' '}
+                    <span className={s.info__value}>
+                      ${movie.revenue.toLocaleString()}
+                    </span>
+                  </li>
+                ) : (
+                  ''
+                )}
+                {movie.runtime !== 0 ? (
+                  <li className={s.info__item}>
+                    Runtime:{' '}
+                    <span className={s.info__value}>
+                      {timeConvert(movie.runtime)}
+                    </span>
+                  </li>
+                ) : (
+                  ''
+                )}
+                <li className={s.info__item}>
+                  Genres:{' '}
+                  <ul className={s.genres}>
+                    {movie.genres.length > 0 ? (
+                      movie.genres.map(({ id, name }, index) => (
+                        <li className={s.genres__item} key={id}>
+                          {(index ? ', ' : '') + name}
                         </li>
-                    </ul>
-                    
-                    <p className={s.overview}>{movie.overview}</p>
+                      ))
+                    ) : (
+                      <p className={s.genres__item}>Other</p>
+                    )}
+                  </ul>
+                </li>
+              </ul>
 
-                    <div className={s.additional}>
-                        <Link to={`/movies/${movieId}/cast`} className={s.additional__button}>Cast</Link>
-                        <Link to={`/movies/${movieId}/reviews`} className={s.additional__button}>Reviews</Link>
-                    </div>
-                </div>
-            </div>}
-        
-        <Outlet/>
-    </>
+              <p className={s.overview}>{movie.overview}</p>
+
+              <div className={s.additional}>
+                <Link
+                  to={`/react-hw-05-movies/movies/${movieId}/cast`}
+                  className={s.additional__button}
+                >
+                  Cast
+                </Link>
+                <Link
+                  to={`/react-hw-05-movies/movies/${movieId}/reviews`}
+                  className={s.additional__button}
+                >
+                  Reviews
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <Outlet />
+      </>
+    );
 }
