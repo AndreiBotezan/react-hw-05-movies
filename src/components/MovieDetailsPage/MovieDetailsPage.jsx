@@ -68,11 +68,11 @@ export default function MovieDetailsPage() {
     }
 
     function timeConvert(time) {
-        var duration = time;
-        var hours = (duration / 60);
-        var roundedHours = Math.floor(hours);
-        var minutes = (hours - roundedHours) * 60;
-        var roundedMinutes = Math.round(minutes);
+        let duration = time;
+        let hours = duration / 60;
+        let roundedHours = Math.floor(hours);
+        let minutes = (hours - roundedHours) * 60;
+        let roundedMinutes = Math.round(minutes);
         let hoursText = roundedHours === 1 ? `${roundedHours} hour ` : `${roundedHours} hours `;
         let minutesText = roundedMinutes === 1 ? `${roundedMinutes} minute` : `${roundedMinutes} minutes`;
 
